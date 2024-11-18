@@ -120,6 +120,11 @@ Make sure your project includes the following dependencies in your `build.gradle
    - **Custom Top and Bottom App Bars**: Adds visual appeal with a branded top bar and bottom navigation.
    - **Custom Icons and Images**: Enhances the UI with unique icons and imagery for easy navigation.
 
+### 12. First-Launch Tutorial
+   - **Interactive Walkthrough**: A step-by-step guide introduces users to the app’s features upon first launch.
+   - **Highlights Key Feature**s: Explains the camera, location-based photo organization, AI-powered landmark recognition, and city albums.
+   - **Permission Requests During Tutorial**: Guides users through granting necessary permissions (camera and location) in a non-intrusive way.
+
 ---
 
 ## Screenshots
