@@ -73,44 +73,50 @@ Make sure your project includes the following dependencies in your `build.gradle
    - **Location Permission**: Requests location access to determine the city or place where each photo is taken.
    - **Reverse Geocoding**: Uses GPS data to identify city names, organizing photos into city-specific galleries.
    - **City-Specific Albums**: Automatically saves photos into albums named after each city.
-
-### 2. Navigation and Deep Linking
+   - 
+### 2. AI-Powered Landmark Recognition
+   - **Landmark Detection**: Utilizes an AI model to recognize landmarks from photos taken by users.
+   - **Landmarks Page**: Displays detected landmarks and organizes them into a dedicated section.
+   - **Google Maps Integration**: Clicking on a landmark shows the route to the location via Google Maps API.
+   - **Landmark Metadata Storage**: Saves landmark details like name and description in the Room database.
+   - 
+### 3. Navigation and Deep Linking
    - **Multi-Screen Layout**: Includes a Landing Page, MyPlaceScreen, and GalleryScreen for easy navigation.
    - **Navigation with NavHost**: Manages screen transitions and navigation with NavHost.
    - **Deep Linking with Firebase**: Push notifications use deep linking to open the GalleryScreen for a specific place.
    - **Bottom Navigation Bar**: Icons for Home, Camera, Bookmarks, and Profile for quick access.
 
-### 3. Database and Data Persistence
+### 4. Database and Data Persistence
    - **Room Database**: Saves places locally with city names and photo metadata, making the app functional offline.
    - **ViewModels**: Separates data with `PlacesViewModel` and `GalleryViewModel` for clear lifecycle management.
    - **Repository Pattern**: Provides a `PlaceRepository` interface and `PlaceRepositoryImpl` for structured data access.
 
-### 4. Wikipedia API Integration
+### 5. Wikipedia API Integration
    - **City Information Fetching**: Retrieves city descriptions and images from Wikipedia for each detected location.
    - **Dynamic Content Loading**: Displays city-specific data dynamically based on user location.
 
-### 5. Push Notifications
+### 6. Push Notifications
    - **Firebase Cloud Messaging (FCM)**: Sends notifications to engage users.
    - **Deep Linking in Notifications**: Notifications open specific screens, such as GalleryScreen, based on the payload data.
    - **Payload Handling**: Manages in-app navigation based on data sent from Firebase, ensuring the user reaches relevant screens.
 
-### 6. Animated UI Transitions
+### 7. Animated UI Transitions
    - **Screen Transitions**: Smooth animations, including slide and fade transitions, improve navigation experience.
    - **Animated Loading Indicators**: Circular progress indicators show data is loading.
 
-### 7. Utility and Helper Classes
+### 8. Utility and Helper Classes
    - **LocationHelper**: Handles location services, permissions, and reverse geocoding.
    - **PhotoHelper**: Manages camera functionality, saving images with metadata.
 
-### 8. Permissions Management
+### 9. Permissions Management
    - **Camera and Location Permissions**: Dual permission requests allow for location-based photo management.
    - **Error Handling for Permissions**: Provides guidance when permissions aren’t granted.
 
-### 9. Image Handling
+### 10. Image Handling
    - **FileProvider for Secure Image Access**: Enables secure image sharing within the app.
    - **Temporary Image Storage**: Saves captured photos in a temporary app directory.
 
-### 10. User Interface Components
+### 11. User Interface Components
    - **Custom Top and Bottom App Bars**: Adds visual appeal with a branded top bar and bottom navigation.
    - **Custom Icons and Images**: Enhances the UI with unique icons and imagery for easy navigation.
 
