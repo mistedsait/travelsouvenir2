@@ -6,6 +6,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.navigation.NavHostController
 import com.example.travelsouvenir.pages.DisplayAllPlaces
 import com.example.travelsouvenir.pages.NoPlace
+import com.example.travelsouvenir.pages.SearchablePlaceList
 import com.example.travelsouvenir.viewmodels.PlacesViewModel
 
 
@@ -26,7 +27,7 @@ fun MyPlaceScreen(viewModel: PlacesViewModel, navController: NavHostController) 
     } else {
         Log.d("UI_UPDATE", "Displaying ${places.size} places.")
         // Call DisplayAllPlaces and handle click navigation there
-        DisplayAllPlaces(places) { placeName ->
+        SearchablePlaceList(viewModel) { placeName ->
             // Navigate only when a place is clicked
             navController.navigate("GalleryScreen/$placeName")
         }

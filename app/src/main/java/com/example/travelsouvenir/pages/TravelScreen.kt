@@ -220,7 +220,7 @@ fun MyScreenContent(viewModel: PlacesViewModel, deepLinkPlaceName: String? = nul
                 TravelScreen.BookmarkScreen.route,
                 enterTransition = { fadeIn(animationSpec = tween(300)) },
                 exitTransition = { fadeOut(animationSpec = tween(300)) }
-            ) { BookmarkScreen(navController) }
+            ) { BookmarkScreen(viewModel,navController) }
             composable(
                 TravelScreen.GuidePage.route,
                 enterTransition = { fadeIn(animationSpec = tween(300)) },

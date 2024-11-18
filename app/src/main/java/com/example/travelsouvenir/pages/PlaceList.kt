@@ -18,8 +18,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -34,8 +37,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.travelsouvenir.R
+import com.example.travelsouvenir.viewmodels.PlacesViewModel
 
 
 @Composable
@@ -109,13 +114,32 @@ fun DisplayPlace(place: Place, onClick: () -> Unit) {
         }
     }
 }
+@Composable
+fun SearchablePlaceList(viewModel: PlacesViewModel = hiltViewModel(), onPlaceClick: (String) -> Unit) {
+    var searchQuery by remember { mutableStateOf(viewModel.searchQuery.value) }
+    val filteredPlaces by viewModel.filteredPlaces.collectAsState(initial = emptyList())
+    val allPlaces = viewModel.allPlaces
 
+    val placesToDisplay = if (searchQuery.isEmpty()) allPlaces else filteredPlaces
 
-
+    Column(modifier = Modifier.fillMaxSize()) {
+        TextField(
+            value = searchQuery,
+            onValueChange = { query ->
+                searchQuery = query
+                viewModel.updateSearchQuery(query)
+            },
+            label = { Text("Search places") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        )
+        DisplayAllPlaces(places = placesToDisplay, onPlaceClick = onPlaceClick)
+    }
+}
 
 @Composable
 fun DisplayAllPlaces(places: List<Place>, onPlaceClick: (String) -> Unit) {
-
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -133,4 +157,3 @@ fun DisplayAllPlaces(places: List<Place>, onPlaceClick: (String) -> Unit) {
         }
     }
 }
-

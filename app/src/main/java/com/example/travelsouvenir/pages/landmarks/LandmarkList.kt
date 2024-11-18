@@ -18,7 +18,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,8 +36,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.travelsouvenir.R
+import com.example.travelsouvenir.pages.DisplayAllPlaces
+import com.example.travelsouvenir.viewmodels.LandmarkViewModel
+import com.example.travelsouvenir.viewmodels.PlacesViewModel
 
 
 @Composable
@@ -111,13 +117,43 @@ fun DisplayLandmark(landmark: Landmark, onClick: () -> Unit) {
 }
 
 
+@Composable
+fun SearchableLandmarkList(viewModel: LandmarkViewModel = hiltViewModel(), onPlaceClick: (String) -> Unit) {
+    var searchQuery by remember { mutableStateOf(viewModel.searchQuery.value) }
+    val filteredPlaces by viewModel.filteredPlaces.collectAsState(initial = emptyList())
+
+    val allLandmarks = viewModel.allLandmarks
 
 
+    val placesToDisplay = if (searchQuery.isEmpty()) allLandmarks else filteredPlaces
+    Column(modifier = Modifier.fillMaxSize()) {
+        // Search bar
+        TextField(
+            value = searchQuery,
+            onValueChange = { query ->
+                searchQuery = query  // Update local search query state
+                viewModel.updateSearchQuery(query)  // Update ViewModel's search query
+            },
+            label = { Text("Search landmarks") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        )
+
+        // Pass filtered landmarks to DisplayAllLandmarks
+        DisplayAllLandmarks(
+            landmarks = placesToDisplay,
+            onLandmarkClick = { landmark ->
+                onPlaceClick(landmark.name)  // Pass the name of the landmark to onPlaceClick
+            }
+        )
+    }
+}
 
 @Composable
 fun DisplayAllLandmarks(
     landmarks: List<Landmark>,
-    onLandmarkClick: (Landmark) -> Unit, // Pass the Landmark object
+    onLandmarkClick: (Landmark) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -130,11 +166,12 @@ fun DisplayAllLandmarks(
                 exit = fadeOut()
             ) {
                 DisplayLandmark(landmark) {
-                    onLandmarkClick(landmark) // Pass the entire Landmark object on click
+                    onLandmarkClick(landmark)
                 }
             }
         }
     }
 }
+
 
 

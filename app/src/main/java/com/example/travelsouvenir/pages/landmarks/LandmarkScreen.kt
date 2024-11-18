@@ -24,11 +24,11 @@ fun LandmarkScreen(
     if (landmarks.isEmpty()) {
         NoPlace()
     } else {
-        DisplayAllLandmarks(landmarks) { landmark ->
+        // Use SearchableLandmarkList instead of DisplayAllLandmarks
+        SearchableLandmarkList(viewModel = viewModel) { landmarkName ->
             // Navigate to GoogleMapsScreen with landmark's name
-            val validRoute = "GoogleMapsScreen/${landmark.name}"
+            val validRoute = "GoogleMapsScreen/$landmarkName"
             navController.navigate(validRoute)
-
         }
     }
 }

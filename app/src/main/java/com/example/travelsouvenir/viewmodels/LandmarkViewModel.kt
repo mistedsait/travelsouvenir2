@@ -10,6 +10,11 @@ import com.example.travelsouvenir.data.LandmarkRepository
 import com.example.travelsouvenir.pages.Place
 import com.example.travelsouvenir.pages.landmarks.Landmark
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,17 +31,37 @@ class LandmarkViewModel @Inject constructor(
             landmarkRepository.insertLandmark(landmark)
         }
     }
+
+    val allLandmarks: List<Landmark>
+        get() = _landmarks.value ?: emptyList()
+
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
+
+    val filteredPlaces = searchQuery
+        .debounce(400)
+        .mapLatest { query ->
+            if (query.isEmpty()) {
+                _landmarks.value ?: emptyList()
+            } else {
+                _landmarks.value?.filter { place ->
+                    place.name.contains(query, ignoreCase = true)
+                } ?: emptyList()
+            }
+        }
+
+
     fun loadLandmarks(titles: List<String>) {
         viewModelScope.launch {
             val currentLandmarks = mutableListOf<Landmark>()
             for (title in titles) {
                 try {
-                    // Fetching place info from repository
                     val landmarkEntity = landmarkRepository.fetchLandmarkInfo(title)
                     landmarkRepository.insertLandmark(landmarkEntity)
 
                     val landmark = Landmark(
-                        id = landmarkEntity.id.toInt(),  // Use actual ID if available
+                        id = landmarkEntity.id.toInt(),
                         name = landmarkEntity.name,
                         description = landmarkEntity.description,
                         originalImage = landmarkEntity.originalImage ?: "",
@@ -72,5 +97,9 @@ class LandmarkViewModel @Inject constructor(
 
     suspend fun getLandmarkById(id: Long): LandmarkEntity {
         return landmarkRepository.getLandmarkById(id)
+    }
+
+    fun updateSearchQuery(query: String) {
+        _searchQuery.value = query
     }
 }
