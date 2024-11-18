@@ -118,9 +118,17 @@ Make sure your project includes the following dependencies in your `build.gradle
 
 ## Screenshots
 
-<img src="https://github.com/user-attachments/assets/bc5e15d9-464b-4fa5-89e1-1fb32a89cb7e" alt="Screenshot 1" width="250" height="550"/>
-<img src="https://github.com/user-attachments/assets/e2264245-998d-4eb4-b2c3-f563d1cb8209" alt="Screenshot 2" width="250" height="550"/>
-<img src="https://github.com/user-attachments/assets/1d9ff69d-2e83-44b6-83a6-f996fd7c3bea" alt="Screenshot 3" width="250" height="550"/>
+<img src="https://github.com/user-attachments/assets/783591f3-ebfc-4b9a-ba16-ff62af42af1a" alt="Screenshot 1" width="250" height="550"/>
+<img src="https://github.com/user-attachments/assets/969b36c4-92c7-472c-8af9-633c6bfd0a64" alt="Screenshot 2" width="250" height="550"/>
+<img src="https://github.com/user-attachments/assets/e6cb4fc6-7013-4ef1-8c26-08b23f68ac2d" alt="Screenshot 3" width="250" height="550"/>
+<img src="https://github.com/user-attachments/assets/07e39f24-8be7-47d9-b4e1-2bbd9698e916" alt="Screenshot 4" width="250" height="550"/>
+<img src="https://github.com/user-attachments/assets/d03691b2-1a2d-4ba8-b4b4-094996267dac" alt="Screenshot 5" width="250" height="550"/>
+<img src="https://github.com/user-attachments/assets/3ed548a9-8628-40f2-843c-3ab4959a667c" alt="Screenshot 6" width="250" height="550"/>
+<img src="https://github.com/user-attachments/assets/b518c5bb-64df-4129-a574-996ec77abc40" alt="Screenshot 7" width="250" height="550"/>
+<img src="https://github.com/user-attachments/assets/6970df17-ed13-489e-8bce-e2e564ac7731" alt="Screenshot 8" width="250" height="550"/>
+<img src="https://github.com/user-attachments/assets/5186cee1-c0c1-45dc-a40e-fd9a0a84ebb9" alt="Screenshot 9" width="250" height="550"/>
+<img src="https://github.com/user-attachments/assets/1648d290-e01a-45ea-a36b-663d91194c9a" alt="Screenshot 10" width="250" height="550"/>
+<img src="https://github.com/user-attachments/assets/664028a1-0143-4df1-8188-1bd2266d8aed" alt="Screenshot 11" width="250" height="550"/>
 
 ---
 
